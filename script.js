@@ -20,8 +20,20 @@ function recommendationCard(recommendation) {
   const detail = document.createElement("p");
   detail.textContent = recommendation.relationship;
 
-  footer.append(attribution, detail);
   article.append(quote, footer);
+
+  footer.append(attribution, detail);
+
+  if (recommendation.documentUrl) {
+    const link = document.createElement("a");
+    link.className = "letter-link";
+    link.href = recommendation.documentUrl;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.textContent = "View letter";
+    article.append(link);
+  }
+
   return article;
 }
 

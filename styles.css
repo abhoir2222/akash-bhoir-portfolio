@@ -333,6 +333,24 @@ footer p {
   background: var(--paper);
 }
 
+.letter-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-top: 20px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--blue);
+  background: var(--surface);
+  font-weight: 750;
+}
+
+.letter-link:hover {
+  border-color: var(--blue);
+}
+
 blockquote {
   margin: 0;
   color: #26343d;
