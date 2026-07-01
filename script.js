@@ -1,44 +1,38 @@
-const list = document.querySelector("#recommendation-list");
-
-function recommendationCard(recommendation) {
-  const article = document.createElement("article");
-  article.className = "quote-card";
-
-  const quote = document.createElement("blockquote");
-  quote.textContent = recommendation.quote;
-
-  const footer = document.createElement("footer");
-  const attribution = document.createElement("div");
-  const name = document.createElement("strong");
-  name.textContent = recommendation.name;
-
-  const title = document.createElement("p");
-  title.textContent = `${recommendation.role}, ${recommendation.company}`;
-
-  attribution.append(name, title);
-
-  const detail = document.createElement("p");
-  detail.textContent = recommendation.relationship;
-
-  article.append(quote, footer);
-
-  footer.append(attribution, detail);
-
-  if (recommendation.documentUrl) {
-    const link = document.createElement("a");
-    link.className = "letter-link";
-    link.href = recommendation.documentUrl;
-    link.target = "_blank";
-    link.rel = "noreferrer";
-    link.textContent = "View letter";
-    article.append(link);
-  }
-
-  return article;
-}
-
-if (list && Array.isArray(window.recommendations)) {
-  window.recommendations.forEach((recommendation) => {
-    list.appendChild(recommendationCard(recommendation));
+/* ── Scroll-reveal (Intersection Observer) ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
   });
-}
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── Recommendations ── */
+(function renderRecommendations() {
+  const list = document.getElementById('rec-list');
+  if (!list || !window.recommendations) return;
+
+  list.innerHTML = window.recommendations.map(r => `
+    <div class="rec-card reveal">
+      <div class="rec-qdot">&ldquo;</div>
+      <p class="rec-quote">${r.quote}</p>
+      <div class="rec-divider"></div>
+      <div class="rec-name">${r.name}</div>
+      <div class="rec-who">${r.role} · ${r.company}</div>
+      ${r.relationship ? `<div class="rec-who" style="margin-top:2px;font-style:italic;">${r.relationship}</div>` : ''}
+      ${r.documentUrl ? `<a class="rec-link" href="${r.documentUrl}" target="_blank" rel="noreferrer">View recommendation letter ↗</a>` : ''}
+    </div>
+  `).join('');
+
+  document.querySelectorAll('#rec-list .reveal').forEach(el => observer.observe(el));
+})();
+
+/* ── Staggered children ── */
+document.querySelectorAll('[data-stagger]').forEach(parent => {
+  Array.from(parent.children).forEach((child, i) => {
+    child.style.transitionDelay = `${i * 80}ms`;
+  });
+});

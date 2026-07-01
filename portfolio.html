@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akash C. Bhoir — Industrial Engineer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243360;
+      --accent: #e8a020;
+      --accent-light: #f5c55a;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f9fafb;
+      --white: #ffffff;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --tag-bg: #eef2ff;
+      --tag-text: #3730a3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--navy);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 2rem; height: 56px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .nav-brand { color: var(--white); font-weight: 700; font-size: 1rem; letter-spacing: .03em; }
+    .nav-brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.75); text-decoration: none;
+      font-size: .85rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e3a5f 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(232,160,32,.15); border: 1px solid rgba(232,160,32,.4);
+      color: var(--accent-light); font-size: .8rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .35rem 1rem; border-radius: 999px; margin-bottom: 1.25rem;
+    }
+    .hero-name {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800; color: var(--white); letter-spacing: -.02em;
+      line-height: 1.1; margin-bottom: .5rem;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(255,255,255,.75); font-weight: 400; margin-bottom: 1.75rem;
+    }
+    .hero-contacts {
+      display: flex; flex-wrap: wrap; gap: .75rem;
+      justify-content: center; margin-bottom: 2.25rem;
+    }
+    .hero-contacts a {
+      display: flex; align-items: center; gap: .4rem;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.85); text-decoration: none;
+      padding: .45rem .9rem; border-radius: 6px; font-size: .85rem;
+      transition: background .2s, border-color .2s;
+    }
+    .hero-contacts a:hover { background: rgba(255,255,255,.16); border-color: var(--accent); color: var(--accent-light); }
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;
+      margin-top: .5rem;
+    }
+    .stat {
+      text-align: center;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px; padding: .9rem 1.4rem; min-width: 110px;
+    }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: .72rem; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .05em; margin-top: .25rem; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .4rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 800;
+      color: var(--navy); margin-bottom: 2.5rem; letter-spacing: -.02em;
+    }
+    .section-title::after {
+      content: ''; display: block; width: 48px; height: 4px;
+      background: var(--accent); border-radius: 2px; margin-top: .5rem;
+    }
+
+    /* ── SUMMARY ── */
+    #about { background: var(--white); }
+    .summary-text {
+      font-size: 1.08rem; color: #374151; line-height: 1.8; max-width: 800px;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+    .timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.75rem 2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+      transition: box-shadow .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .exp-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 4px; background: var(--accent);
+    }
+    .exp-card:hover { box-shadow: 0 6px 24px rgba(26,39,68,.1); transform: translateY(-2px); }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: .5rem; margin-bottom: .75rem; }
+    .exp-company { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+    .exp-role { font-size: .95rem; color: var(--muted); font-style: italic; margin-top: .1rem; }
+    .exp-meta { text-align: right; }
+    .exp-location { font-size: .8rem; color: var(--muted); }
+    .exp-date {
+      font-size: .78rem; font-weight: 600; color: var(--white);
+      background: var(--navy); padding: .25rem .7rem; border-radius: 999px;
+      display: inline-block; margin-top: .25rem;
+    }
+    .exp-bullets { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: .6rem; }
+    .exp-bullets li {
+      font-size: .9rem; color: #374151; padding-left: 1.2rem; position: relative; line-height: 1.6;
+    }
+    .exp-bullets li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .8rem; top: .05em;
+    }
+    .highlight { font-weight: 700; color: var(--navy); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--white); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+    .skill-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.25rem 1.5rem;
+    }
+    .skill-category {
+      font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--navy); margin-bottom: .75rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .skill-category::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag {
+      background: var(--tag-bg); color: var(--tag-text);
+      font-size: .75rem; font-weight: 500;
+      padding: .25rem .65rem; border-radius: 999px;
+      border: 1px solid #c7d2fe;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 1.5rem; }
+    @media (max-width: 500px) { .projects-grid { grid-template-columns: 1fr; } }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.75rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .project-card:hover { box-shadow: 0 6px 24px rgba(26,39,68,.1); transform: translateY(-2px); }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .75rem; }
+    .project-name { font-size: 1rem; font-weight: 700; color: var(--navy); }
+    .project-year {
+      font-size: .75rem; font-weight: 600; color: var(--white);
+      background: var(--accent); padding: .2rem .6rem; border-radius: 999px; flex-shrink: 0;
+    }
+    .project-bullets { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .project-bullets li {
+      font-size: .88rem; color: #374151; padding-left: 1.1rem; position: relative; line-height: 1.6;
+    }
+    .project-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .8rem; top: .05em; }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--white); }
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.25rem; }
+    @media (max-width: 500px) { .edu-grid { grid-template-columns: 1fr; } }
+    .edu-card {
+      background: var(--navy); color: var(--white);
+      border-radius: 12px; padding: 1.75rem;
+      position: relative; overflow: hidden;
+    }
+    .edu-card::after {
+      content: '🎓';
+      position: absolute; right: 1.5rem; top: 1.5rem;
+      font-size: 2.5rem; opacity: .12;
+    }
+    .edu-school { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: .25rem; }
+    .edu-degree { font-size: .9rem; color: rgba(255,255,255,.8); font-style: italic; margin-bottom: .75rem; }
+    .edu-meta { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .edu-pill {
+      font-size: .75rem; font-weight: 500;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85); padding: .25rem .7rem; border-radius: 999px;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      text-align: center; padding: 5rem 1.5rem;
+    }
+    #contact .section-label { color: var(--accent-light); }
+    #contact .section-title { color: var(--white); }
+    #contact .section-title::after { margin: .5rem auto 0; }
+    .contact-subtitle { color: rgba(255,255,255,.7); font-size: 1rem; margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      text-decoration: none; font-weight: 600; font-size: .9rem;
+      padding: .75rem 1.75rem; border-radius: 8px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+    .btn-primary { background: var(--accent); color: var(--navy); }
+    .btn-secondary {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25);
+      color: var(--white);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111827; color: rgba(255,255,255,.4);
+      text-align: center; padding: 1.5rem; font-size: .8rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: .75rem; }
+      .nav-links a { font-size: .75rem; }
+      section { padding: 3.5rem 1rem; }
+      .exp-card { padding: 1.25rem 1.25rem 1.25rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Akash <span>Bhoir</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Lean Six Sigma Green Belt</div>
+    <h1 class="hero-name">Akash C. <span>Bhoir</span></h1>
+    <p class="hero-title">Industrial Engineer &amp; Operational Excellence Professional</p>
+    <div class="hero-contacts">
+      <a href="mailto:abhoir2222@gmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        abhoir2222@gmail.com
+      </a>
+      <a href="tel:6699778757">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.1 6.1l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (669) 977-8757
+      </a>
+      <a href="https://linkedin.com/in/abhoir/" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/abhoir
+      </a>
+      <a href="#">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Milpitas, CA
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat"><div class="stat-num">48%</div><div class="stat-label">Throughput Gain</div></div>
+      <div class="stat"><div class="stat-num">$400K</div><div class="stat-label">Annual Savings</div></div>
+      <div class="stat"><div class="stat-num">18%</div><div class="stat-label">Throughput Improved</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Assembly Lines Led</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">Summary</p>
+    <h2 class="section-title">About Me</h2>
+    <p class="summary-text">
+      Lean Six Sigma Green Belt Operational Excellence professional with <strong>6+ years of experience</strong> leading process improvement,
+      Kaizen facilitation, and cultural transformation across manufacturing and logistics operations. Proven change agent delivering
+      measurable gains in Safety, Quality, Delivery, Cost, and People through <strong>DMAIC, VSM, 5S, and Standard Work</strong>.
+      Skilled in coaching cross-functional teams, building daily management systems, and using
+      <strong>Power BI and Tableau</strong> to track KPIs and drive data-informed decisions at scale.
+    </p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label">Career</p>
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="timeline">
+
+      <!-- Almaden -->
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Almaden</div>
+            <div class="exp-role">Industrial Engineer</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-location">Santa Clara, CA</div>
+            <div class="exp-date">Sep 2024 – Present</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Acted as change agent leading operational excellence initiatives across <span class="highlight">3 concurrent assembly lines</span>, establishing governance, standards, and daily management systems to support multi-line scaling.</li>
+          <li>Facilitated Kaizen events, VSM workshops, and cross-functional problem-solving sessions — improving throughput <span class="highlight">18%</span> and reducing process inefficiencies <span class="highlight">11%</span>.</li>
+          <li>Coached technicians and supervisors in Standard Work, 5S, and visual management, embedding a sustainable continuous improvement culture at the shop floor level.</li>
+          <li>Deployed a daily management system tracking OEE, cycle time, and on-time delivery across all 3 lines with regular escalation reporting to leadership.</li>
+          <li>Executed line balancing studies using MODAPTS to optimize station cycle times against takt time, surfacing bottlenecks before they impacted customer delivery.</li>
+          <li>Led greenfield design of assembly line layout and <span class="highlight">400-SKU warehouse</span> during facility relocation using AutoCAD 2D and FlexSim simulation — achieving <span class="highlight">48% throughput improvement</span> post-relocation.</li>
+          <li>Developing an intelligent SKU retrieval optimization system for a <span class="highlight">13,200-SKU, 16,600-location warehouse</span> using Dijkstra's shortest-path algorithm in Python to minimize picker travel distance.</li>
+        </ul>
+      </div>
+
+      <!-- EVRAZ -->
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">EVRAZ Rocky Mountain Steel</div>
+            <div class="exp-role">Operational Excellence Engineer – Summer Internship</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-location">Pueblo, CO</div>
+            <div class="exp-date">May 2023 – Aug 2023</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed a demand-driven Kanban system using SQL forecasting and real-time stock-level tracking — reducing standing inventory <span class="highlight">48%</span> and saving <span class="highlight">$400K annually</span> while maintaining material availability.</li>
+          <li>Facilitated VSM workshops to identify waste and reduce process variability, delivering a sustained lean deployment roadmap and <span class="highlight">5% material waste reduction</span>.</li>
+          <li>Applied DMAIC to design and validate process improvements on a pilot production line, achieving an <span class="highlight">8% cycle time reduction</span>.</li>
+          <li>Built Power BI dashboards tracking production output, inventory levels, and downtime to surface supply chain bottlenecks for plant leadership.</li>
+        </ul>
+      </div>
+
+      <!-- Econship -->
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Econship Tech</div>
+            <div class="exp-role">Operations Executive</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-location">Mumbai, India</div>
+            <div class="exp-date">Mar 2020 – Jun 2022</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Directed on-site process flow evaluations across container manufacturing operations (corrugation, welding, assembly, inspection), generating audit reports to ensure <span class="highlight">ISO 1496/1 compliance</span>.</li>
+          <li>Managed global trade and logistics operations across multiple international ports, delivering standardized training materials to drive process consistency across regions.</li>
+          <li>Applied data analytics to optimize shipping routes and logistics workflows, reducing costs <span class="highlight">20%</span> and improving delivery performance across international operations.</li>
+        </ul>
+      </div>
+
+      <!-- Ashokkumar -->
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Ashokkumar Rameshchandra &amp; Co.</div>
+            <div class="exp-role">Industrial Engineer</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-location">Mumbai, India</div>
+            <div class="exp-date">Jul 2018 – Mar 2020</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built and maintained SKU-based inventory management systems for high-value components, ensuring consistent stock control across a multi-category distribution supply chain.</li>
+          <li>Conducted ABC analysis and implemented JIT inventory practices to align stock levels with demand, reducing holding costs while maintaining availability of critical components.</li>
+          <li>Led logistics and transportation network coordination, optimizing routing and carrier allocation to reduce distribution costs across regional supply chains.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">Skills &amp; Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-category">Lean &amp; Continuous Improvement</div>
+        <div class="skill-tags">
+          <span class="tag">Lean Manufacturing</span><span class="tag">Kaizen Facilitation</span>
+          <span class="tag">Value Stream Mapping</span><span class="tag">Standard Work</span>
+          <span class="tag">5S / 6S</span><span class="tag">Visual Management</span>
+          <span class="tag">DMAIC</span><span class="tag">Daily Management System</span>
+          <span class="tag">Gemba Walks</span><span class="tag">Waste Elimination</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Problem-Solving &amp; Analysis</div>
+        <div class="skill-tags">
+          <span class="tag">Root Cause Analysis</span><span class="tag">8D Problem Solving</span>
+          <span class="tag">A3 Methodology</span><span class="tag">5-Why Analysis</span>
+          <span class="tag">Pareto Analysis</span><span class="tag">DOE</span>
+          <span class="tag">SPC</span><span class="tag">FMEA</span><span class="tag">RCFA</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Data Analytics &amp; Visualization</div>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span><span class="tag">Tableau</span>
+          <span class="tag">SQL</span><span class="tag">Python (Pandas, NumPy)</span>
+          <span class="tag">Excel (Advanced, VBA)</span><span class="tag">Minitab</span>
+          <span class="tag">Regression Analysis</span><span class="tag">Predictive Analytics</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Operations Management</div>
+        <div class="skill-tags">
+          <span class="tag">Capacity Planning</span><span class="tag">Line Balancing</span>
+          <span class="tag">MODAPTS</span><span class="tag">Kanban / JIT</span>
+          <span class="tag">ABC Analysis</span><span class="tag">Demand Forecasting</span>
+          <span class="tag">Warehouse Layout</span><span class="tag">OEE</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Project &amp; Program Management</div>
+        <div class="skill-tags">
+          <span class="tag">Cross-Functional Leadership</span><span class="tag">KPI Development</span>
+          <span class="tag">Change Management</span><span class="tag">Stakeholder Communication</span>
+          <span class="tag">Risk Mitigation</span><span class="tag">Capex Management</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Software &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="tag">SAP / ERP</span><span class="tag">AutoCAD</span>
+          <span class="tag">FlexSim</span><span class="tag">SolidWorks</span>
+          <span class="tag">ANSYS</span><span class="tag">MATLAB</span>
+          <span class="tag">Minitab</span><span class="tag">MODAPTS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Featured Work</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">DMAIC Study of Material Unloading System</div>
+          <div class="project-year">2023</div>
+        </div>
+        <ul class="project-bullets">
+          <li>Led a structured DMAIC engagement, facilitating cross-functional problem-solving sessions using 5-Why, Ishikawa (fishbone), and A3 frameworks to surface root causes of yield-impacting inefficiencies in a steel production environment.</li>
+          <li>Applied 8D problem-solving and Pareto analysis to rank defect contributors by frequency and impact, diagnosing equipment failures and material flow bottlenecks — implementing corrective actions to improve OEE.</li>
+          <li>Evaluated process capability (Cpk) using SPC and Minitab to validate improvement effectiveness; coached operators in standard work protocols to sustain gains after project closure.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">All-Terrain Vehicle Competition (BAJA SAE)</div>
+          <div class="project-year">2017</div>
+        </div>
+        <ul class="project-bullets">
+          <li>Led a team of 12 engineers through end-to-end design, manufacturing, and assembly of an off-road vehicle for the SAE BAJA South Africa competition — securing <strong>5th place</strong> in the team's inaugural season.</li>
+          <li>Applied Design for Manufacturing (DFM) principles during chassis and suspension development, evaluating component geometry and material selection against fabrication constraints.</li>
+          <li>Managed project milestones, cross-functional team coordination, and build schedule from concept through competition-ready assembly, mirroring NPI project lifecycle management.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <p class="section-label">Academic Background</p>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-school">San Jose State University</div>
+        <div class="edu-degree">Master of Science, Industrial and Systems Engineering</div>
+        <div class="edu-meta">
+          <span class="edu-pill">San Jose, CA</span>
+          <span class="edu-pill">May 2024</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-school">University of Mumbai</div>
+        <div class="edu-degree">Bachelor of Engineering, Mechanical Engineering</div>
+        <div class="edu-meta">
+          <span class="edu-pill">Mumbai, India</span>
+          <span class="edu-pill">July 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="contact-subtitle">Open to new opportunities in operational excellence, industrial engineering, and continuous improvement.</p>
+    <div class="contact-links">
+      <a href="mailto:abhoir2222@gmail.com" class="contact-btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Send Email
+      </a>
+      <a href="https://linkedin.com/in/abhoir/" target="_blank" rel="noopener" class="contact-btn btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn Profile
+      </a>
+      <a href="tel:6699778757" class="contact-btn btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.1 6.1l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (669) 977-8757
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Akash C. Bhoir · Industrial Engineer · Milpitas, CA</p>
+</footer>
+
+</body>
+</html>
