@@ -30,6 +30,27 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   document.querySelectorAll('#rec-list .reveal').forEach(el => observer.observe(el));
 })();
 
+/* ── Hero scroll parallax (Apple-style fade + drift) ── */
+(function heroParallax() {
+  const heroInner = document.querySelector('.hero-inner');
+  const photo = document.querySelector('.hero-photo-wrap');
+  if (!heroInner) return;
+
+  let ticking = false;
+  function update() {
+    const y = window.scrollY;
+    const h = window.innerHeight;
+    const p = Math.min(y / (h * 0.7), 1);          // 0 → 1 over first 70vh
+    heroInner.style.opacity = 1 - p * 0.9;
+    heroInner.style.transform = `translateY(${y * 0.28}px)`; // content drifts slower than scroll
+    if (photo) photo.style.transform = `scale(${1 - p * 0.12})`;
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+})();
+
 /* ── Staggered children ── */
 document.querySelectorAll('[data-stagger]').forEach(parent => {
   Array.from(parent.children).forEach((child, i) => {
