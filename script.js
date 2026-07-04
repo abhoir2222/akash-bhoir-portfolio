@@ -34,6 +34,8 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 (function heroParallax() {
   const heroInner = document.querySelector('.hero-inner');
   const photo = document.querySelector('.hero-photo-wrap');
+  const heroName = document.querySelector('.hero-name');
+  const navLogo = document.querySelector('.nav-logo');
   if (!heroInner) return;
 
   let ticking = false;
@@ -44,11 +46,21 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     heroInner.style.opacity = 1 - p * 0.9;
     heroInner.style.transform = `translateY(${y * 0.28}px)`; // content drifts slower than scroll
     if (photo) photo.style.transform = `scale(${1 - p * 0.12})`;
+
+    // Name → nav bar handoff: big name shrinks upward and fades,
+    // nav title takes over right as it disappears (reverses on scroll up)
+    const pn = Math.min(y / (h * 0.5), 1);         // 0 → 1 over first 50vh
+    if (heroName) {
+      heroName.style.transform = `scale(${1 - pn * 0.4})`;
+      heroName.style.opacity = 1 - pn;
+    }
+    if (navLogo) navLogo.classList.toggle('show', pn >= 0.9);
     ticking = false;
   }
   window.addEventListener('scroll', () => {
     if (!ticking) { requestAnimationFrame(update); ticking = true; }
   }, { passive: true });
+  update(); // set correct state on load (e.g. when landing on an #anchor)
 })();
 
 /* ── Staggered children ── */

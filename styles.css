@@ -35,6 +35,13 @@ body  { font-family: var(--font); background: var(--white); color: var(--text); 
 .nav-logo {
   color: var(--white); text-decoration: none;
   font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+  pointer-events: none;
+}
+.nav-logo.show {
+  opacity: 1; transform: translateY(0);
+  pointer-events: auto;
 }
 .nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-links a {
@@ -99,6 +106,8 @@ body  { font-family: var(--font); background: var(--white); color: var(--text); 
   font-size: clamp(76px,13vw,136px);
   font-weight: 700; letter-spacing: -0.04em; line-height: 0.92;
   color: var(--white); margin-bottom: 32px;
+  transform-origin: center top;
+  will-change: transform, opacity;
 }
 .hero-sub {
   font-size: clamp(1.15rem,2.5vw,1.65rem); font-weight: 400;
