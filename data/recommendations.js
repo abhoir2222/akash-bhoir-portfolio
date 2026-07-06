@@ -1,9 +1,9 @@
 window.recommendations = [
   {
     name: "Lawrence Trosen",
-    role: "Vice President",
-    company: "Golden West Packaging Group",
-    relationship: "Worked closely with Akash at Almaden",
+    role: "VP of Operations (former)",
+    company: "Almaden",
+    relationship: "Managed Akash at Almaden — now Vice President at Golden West Packaging Group",
     documentUrl: "assets/recommendations/Lawrence-Trosen-Golden-West-Packaging.pdf",
     quote:
       "What sets Akash apart is his attention to detail paired with big-picture thinking. Whether he's redesigning a department layout to minimize waste and improve throughput, or stepping into high-pressure situations with professionalism and clarity, he brings value far beyond his role."
