@@ -26,7 +26,7 @@
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#recommendations">Recommendations</a>
-      <a class="nav-resume" href="assets/Akash_Bhoir_0625.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
+      <a class="nav-resume" href="assets/Akash_Bhoir_0705.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
     </div>
   </div>
 </nav>
@@ -124,6 +124,108 @@
         <span class="impact-num">20%</span>
         <div class="impact-title">Logistics cost reduction</div>
         <div class="impact-desc">Applied data analytics to optimize shipping routes and global logistics workflows at Econship Tech, improving delivery performance across international port operations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SYSTEMS IN MOTION (dark, scroll-driven) ── -->
+<section class="section viz-section" id="systems">
+  <div class="container">
+    <p class="s-label on-dark reveal">Systems in motion</p>
+    <h2 class="s-head on-dark reveal">The stories behind the numbers.</h2>
+  </div>
+
+  <div class="viz-scene" data-viz="almaden">
+    <div class="viz-sticky">
+      <div class="viz-head">
+        <h3>Greenfield layout at Almaden</h3>
+        <p>Assembly line and 400-SKU warehouse — designed in AutoCAD, validated in FlexSim, built once.</p>
+      </div>
+      <svg class="viz-svg" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+        <!-- assembly stations (left, bottom) -->
+        <g id="viz-al-stations">
+          <rect x="60"  y="270" width="70" height="70" rx="10" fill="#333338"/>
+          <rect x="170" y="270" width="70" height="70" rx="10" fill="#333338"/>
+          <rect x="280" y="270" width="70" height="70" rx="10" fill="#333338"/>
+          <text x="95"  y="365" text-anchor="middle" font-size="12" fill="#6e6e73">Assembly</text>
+          <text x="205" y="365" text-anchor="middle" font-size="12" fill="#6e6e73">Test</text>
+          <text x="315" y="365" text-anchor="middle" font-size="12" fill="#6e6e73">Pack</text>
+        </g>
+        <!-- conveyor: through stations, elbow up into warehouse -->
+        <path id="viz-al-belt-bed" d="M 40 305 L 420 305 L 420 150 L 480 150"
+              fill="none" stroke="#26262a" stroke-width="18" stroke-linecap="round"/>
+        <path id="viz-al-belt" d="M 40 305 L 420 305 L 420 150 L 480 150"
+              fill="none" stroke="#4a4a50" stroke-width="4" stroke-dasharray="10 9" stroke-linecap="round"/>
+        <!-- boxes on the belt -->
+        <g id="viz-al-boxes">
+          <rect width="22" height="16" rx="3" fill="#2997ff"/>
+          <rect width="22" height="16" rx="3" fill="#2997ff" opacity="0.85"/>
+          <rect width="22" height="16" rx="3" fill="#2997ff" opacity="0.7"/>
+        </g>
+        <!-- warehouse racks (right), appear as you scroll -->
+        <g id="viz-al-racks">
+          <rect x="500" y="55"  width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="650" y="55"  width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="500" y="105" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="650" y="105" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="500" y="155" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="650" y="155" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="500" y="205" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="650" y="205" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="500" y="255" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="650" y="255" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="500" y="305" width="120" height="26" rx="5" fill="#3a3a3e"/>
+          <rect x="650" y="305" width="120" height="26" rx="5" fill="#3a3a3e"/>
+        </g>
+        <text x="635" y="365" text-anchor="middle" font-size="12" fill="#6e6e73">400-SKU warehouse</text>
+      </svg>
+      <div class="vk-nums">
+        <div><span id="viz-al-sku">0</span><em>SKUs placed by ABC analysis</em></div>
+        <div><span id="viz-al-tp">0%</span><em>throughput post-relocation</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="viz-scene" data-viz="kanban">
+    <div class="viz-sticky">
+      <div class="viz-head">
+        <h3>Push to pull</h3>
+        <p>Demand-driven Kanban at EVRAZ — standing inventory falls, availability holds.</p>
+      </div>
+      <div class="viz-kanban">
+        <div class="vk-bars">
+          <div class="vk-bar" data-from="100" data-to="52"><i></i><span>Lime</span></div>
+          <div class="vk-bar" data-from="100" data-to="55"><i></i><span>Alloys</span></div>
+          <div class="vk-bar" data-from="100" data-to="50"><i></i><span>Refractory</span></div>
+          <div class="vk-bar" data-from="100" data-to="54"><i></i><span>Consumables</span></div>
+          <div class="vk-bar vk-hold" data-from="100" data-to="100"><i></i><span>Availability</span></div>
+        </div>
+        <div class="vk-nums">
+          <div><span id="viz-kb-inv">0%</span><em>standing inventory cut</em></div>
+          <div><span id="viz-kb-sav">$0</span><em>annual savings</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="viz-scene" data-viz="takt">
+    <div class="viz-sticky">
+      <div class="viz-head">
+        <h3>Balancing to takt</h3>
+        <p>MODAPTS line-balancing across three assembly lines at Almaden.</p>
+      </div>
+      <div class="viz-takt">
+        <div class="vt-chart">
+          <div class="vt-takt-line"><span>takt time</span></div>
+          <div class="vt-bar" data-from="92" data-to="68"><i></i><span>Station 1</span></div>
+          <div class="vt-bar" data-from="44" data-to="66"><i></i><span>Station 2</span></div>
+          <div class="vt-bar" data-from="98" data-to="69"><i></i><span>Station 3</span></div>
+          <div class="vt-bar" data-from="52" data-to="67"><i></i><span>Station 4</span></div>
+        </div>
+        <div class="vk-nums">
+          <div><span id="viz-tk-n">0%</span><em>throughput improvement</em></div>
+        </div>
       </div>
     </div>
   </div>
@@ -340,7 +442,7 @@
     </div>
     <div class="footer-r">
       <a href="https://linkedin.com/in/abhoir/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-      <a href="assets/Akash_Bhoir_0625.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
+      <a href="assets/Akash_Bhoir_0705.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
       <a href="#hero">Back to top</a>
     </div>
   </div>

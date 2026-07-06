@@ -69,3 +69,73 @@ document.querySelectorAll('[data-stagger]').forEach(parent => {
     child.style.transitionDelay = `${i * 80}ms`;
   });
 });
+
+/* ── Systems-in-motion: scroll-driven scenes (Apple-style scrollytelling) ── */
+(function vizScenes() {
+  const scenes = document.querySelectorAll('.viz-scene');
+  if (!scenes.length) return;
+  const ease = t => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  const beltPath = document.getElementById('viz-al-belt');
+  const beltLen  = beltPath ? beltPath.getTotalLength() : 0;
+  const boxes    = beltPath ? Array.from(document.querySelectorAll('#viz-al-boxes rect')) : [];
+  const racks    = beltPath ? Array.from(document.querySelectorAll('#viz-al-racks rect')) : [];
+  racks.forEach(r => { r.style.opacity = 0; });
+
+  function update() {
+    const vh = window.innerHeight;
+    scenes.forEach(scene => {
+      const r = scene.getBoundingClientRect();
+      const total = r.height - vh;
+      const p = ease(Math.min(Math.max(-r.top / total, 0), 1));
+      const kind = scene.dataset.viz;
+
+      if (kind === 'almaden' && beltPath) {
+        // belt rollers move continuously with scroll
+        beltPath.style.strokeDashoffset = -p * 300;
+        // boxes ride the belt, spaced out, looping across the scene
+        boxes.forEach((b, i) => {
+          const t = Math.min((p * 1.15 + i * 0.28) % 1.0, 1);
+          const pt = beltPath.getPointAtLength(beltLen * t);
+          b.setAttribute('x', pt.x - 11);
+          b.setAttribute('y', pt.y - 22);
+          b.style.opacity = p > 0.02 ? 1 : 0;
+        });
+        // racks assemble into place one by one
+        racks.forEach((r, i) => {
+          const rp = Math.min(Math.max(p * racks.length * 1.3 - i, 0), 1);
+          r.style.opacity = rp;
+          r.setAttribute('transform', `translate(0 ${(1 - rp) * 14})`);
+        });
+        document.getElementById('viz-al-sku').textContent = Math.round(lerp(0, 400, p));
+        document.getElementById('viz-al-tp').textContent = Math.round(lerp(0, 48, p)) + '%';
+      }
+
+      if (kind === 'kanban') {
+        scene.querySelectorAll('.vk-bar').forEach(b => {
+          const h = lerp(+b.dataset.from, +b.dataset.to, p);
+          b.querySelector('i').style.height = h * 0.85 + '%';
+        });
+        document.getElementById('viz-kb-inv').textContent = Math.round(lerp(0, 48, p)) + '%';
+        document.getElementById('viz-kb-sav').textContent =
+          '$' + Math.round(lerp(0, 400, p)) + 'K';
+      }
+
+      if (kind === 'takt') {
+        scene.querySelectorAll('.vt-bar').forEach(b => {
+          const h = lerp(+b.dataset.from, +b.dataset.to, p);
+          b.querySelector('i').style.height = h * 0.85 + '%';
+        });
+        document.getElementById('viz-tk-n').textContent = Math.round(lerp(0, 18, p)) + '%';
+      }
+    });
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+})();
