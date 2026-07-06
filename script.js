@@ -23,7 +23,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       <div class="rec-name">${r.name}</div>
       <div class="rec-who">${r.role} · ${r.company}</div>
       ${r.relationship ? `<div class="rec-who" style="margin-top:2px;font-style:italic;">${r.relationship}</div>` : ''}
-      ${r.documentUrl ? `<a class="rec-link" href="${r.documentUrl}" target="_blank" rel="noreferrer">View recommendation letter ↗</a>` : ''}
+      ${r.documentUrl ? `<a class="rec-link" href="${r.documentUrl}" target="_blank" rel="noreferrer">${r.linkLabel || 'View recommendation letter ↗'}</a>` : ''}
     </div>
   `).join('');
 
