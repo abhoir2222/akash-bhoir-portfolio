@@ -28,6 +28,16 @@ window.recommendations = [
       "Akash made a significant impact by streamlining one of our key operations. He reduced work steps and cut costs by applying lean principles and data-driven analysis, all without sacrificing quality. Akash is a strategic thinker with a talent for turning complex processes into efficient, cost-effective solutions."
   },
   {
+    name: "Zach Abad",
+    role: "Director of Online Solutions",
+    company: "Almaden",
+    relationship: "Worked with Akash at Almaden",
+    documentUrl: "https://www.linkedin.com/in/abhoir/details/recommendations/",
+    linkLabel: "View on LinkedIn ↗",
+    quote:
+      "Akash made a tremendous impact during his time at Almaden. He overhauled our turnkey processes to make them more efficient and transparent. He also worked closely with the online solutions team to identify software and system bugs that impacted inventory management. He is a fantastic co-worker with a great attitude and was a pleasure to work with."
+  },
+  {
     name: "Vy Tran",
     role: "Account Manager",
     company: "Almaden",
