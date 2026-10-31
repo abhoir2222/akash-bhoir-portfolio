@@ -18,6 +18,15 @@ window.recommendations = [
       "One of his most notable contributions was transforming the lime ordering system from a push-based approach to a pull-based strategy. Akash's expertise in industrial engineering concepts and his proactive problem-solving skills were crucial in this transition, which significantly enhanced the mill's operational efficiency."
   },
   {
+    name: "Jack Greene",
+    role: "Senior Director, Enterprise Accounts",
+    company: "Almaden Global",
+    relationship: "Worked with Akash on kit assembly and fulfillment programs",
+    documentUrl: "assets/recommendations/Jack-Greene-Almaden.pdf",
+    quote:
+      "One of his greatest strengths is the ability to anticipate challenges before they arise and develop practical, innovative solutions that keep projects on schedule. His leadership, organizational skills, and dedication to excellence make Akash a trusted resource for complex assembly and distribution operations."
+  },
+  {
     name: "Jamie Kapanka",
     role: "VP of Strategy (former)",
     company: "Almaden",
